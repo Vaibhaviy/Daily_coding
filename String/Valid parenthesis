@@ -1,0 +1,33 @@
+class Solution {
+public:
+    bool isValid(string Str) {
+         int n=Str.length();
+ if(n==0)   return true;
+ if(n%2!=0) return false;
+ 
+stack<char>st; 
+int i=0;
+while(i<n){
+    if(Str[i]=='(' || Str[i]=='{' || Str[i]=='['){
+        st.push(Str[i]);
+    } else if(Str[i]==')'){
+        if(st.empty() || st.top()!='('){ return false; }
+       st.pop();
+    }
+    else if(Str[i]=='}'){
+        if(st.empty() || st.top()!='{'){ return false;}
+        st.pop();
+    }
+    else if(Str[i]==']'){
+        if(st.empty() || st.top()!='['){ return false; }
+        st.pop();
+    }
+    i++;
+}
+
+if(st.empty()){return true;}
+ return false;
+
+        
+    }
+};
