@@ -1,0 +1,46 @@
+class Solution {
+public:
+
+    // Variables to store the starting index and maximum length
+    int start = 0;
+    int maxLen = 0;
+
+    // Function to expand around the given center
+    void expand(string &s, int left, int right)
+    {
+        int n = s.length();
+
+        // Expand while characters are equal
+        while(left >= 0 && right < n && s[left] == s[right])
+        {
+            left--;
+            right++;
+        }
+
+        // Length of palindrome found
+        int len = right - left - 1;
+
+        // Update answer if this palindrome is longer
+        if(len > maxLen)
+        {
+            maxLen = len;
+            start = left + 1;
+        }
+    }
+
+    string longestPalindrome(string s) {
+
+        int n = s.length();
+
+        for(int i = 0; i < n; i++)
+        {
+            // Odd-length palindrome
+            expand(s, i, i);
+
+            // Even-length palindrome
+            expand(s, i, i + 1);
+        }
+
+        return s.substr(start, maxLen);
+    }
+};
