@@ -1,0 +1,41 @@
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        int need[128]={0};
+        int window[128]={0};
+        int left=0,count=0,minLen=INT_MAX,start=0;
+
+        for(char ch: t){
+            need[ch]++;
+        }
+        for(int right=0;right<s.size();right++){
+            char ch=s[right];
+            window[ch]++;
+            if(window[ch] <=need[ch]){
+                count++;
+            }
+            while(count ==t.size()){
+                if(right-left+1<minLen){
+                    minLen=right-left+1;
+                    start=left;
+                }
+                char c=s[left];
+                window[c]--;
+
+                 if(window[c] < need[c])
+                {
+                    count--;
+                }
+
+                // Shrink window
+                left++;
+            }
+        }
+         if(minLen == INT_MAX)
+        {
+            return "";
+        }
+
+        return s.substr(start, minLen);
+    }
+};
