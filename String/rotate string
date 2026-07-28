@@ -1,0 +1,31 @@
+class Solution {
+public:
+    bool rotateString(string s, string goal) {
+
+        if(s.size() != goal.size())
+            return false;
+
+        int n = s.size();
+
+        for(int k = 0; k < n; k++) {
+
+            if(goal[k] != s[0])
+                continue;
+
+            // Make a copy because we'll rotate it
+            string temp = s;
+
+            // Required left rotation
+            int rotate = (n - k) % n;
+
+            reverse(temp.begin(), temp.begin() + rotate);
+            reverse(temp.begin() + rotate, temp.end());
+            reverse(temp.begin(), temp.end());
+
+            if(temp == goal)
+                return true;
+        }
+
+        return false;
+    }
+};
