@@ -1,0 +1,15 @@
+class Solution {
+public:
+    string frequencySort(string s) {
+       unordered_map<char,int>map;
+       for(char ch: s){
+        map[ch]++;
+       }
+       sort(s.begin(),s.end(),[&](char a,char b){
+                if(map[a] == map[b])
+        return a > b;   // or a < b depending on the order you want
+        return map[a] > map[b];
+       });
+       return s;
+    }
+};
