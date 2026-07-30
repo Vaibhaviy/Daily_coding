@@ -1,0 +1,34 @@
+class Solution {
+public:
+    int compress(vector<char>& chars) {
+        int n = chars.size();
+        int idx = 0; // write pointer
+        
+        for (int i = 0; i < n; i++) {
+            char ch = chars[i];
+            int count = 0;
+            
+            // count occurrences of the current char
+            while (i < n && chars[i] == ch) {
+                count++;
+                i++;
+            }
+            
+            // write the char
+            chars[idx++] = ch;
+            
+            // write the count if > 1
+            if (count > 1) {
+                string str = to_string(count);
+                for (char dig : str) {
+                    chars[idx++] = dig;
+                }
+            }
+            
+            i--; // step back because for loop will increment
+        }
+        
+        chars.resize(idx);
+        return idx;
+    }
+};
