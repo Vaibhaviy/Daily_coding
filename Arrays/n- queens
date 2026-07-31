@@ -36,9 +36,7 @@ for(int j=0;j<n;j++){
     }
 }
 }
-    
-
-
+//this is main function calling nqueens to check whether given position is safe for queen
 vector<vector<string>> solveNQueens(int n) {
         vector<string> board(n,string(n,'.'));    // n* n!
          vector<vector<string>>ans;
