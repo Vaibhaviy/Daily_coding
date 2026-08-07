@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int heightChecker(vector<int>& heights) {
+        vector<int> expected = heights;
+        int n = expected.size();
+
+        // Bubble Sort
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (expected[j] > expected[j + 1]) {
+                    swap(expected[j], expected[j + 1]);
+                }
+            }
+        }
+
+        // Count mismatched indices
+        int count = 0;
+        for (int i = 0; i < n; i++) {
+            if (heights[i] != expected[i]) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+};
