@@ -1,0 +1,39 @@
+class Solution {
+public:
+    ListNode* reverseBetween(ListNode* head, int left, int right) {
+
+        if (head == NULL || left == right)
+            return head;
+
+        ListNode* dummy = new ListNode(0);
+        dummy->next = head;
+
+        // Step 1: Reach the node before 'left'
+        ListNode* prevLeft = dummy;
+        for (int i = 1; i < left; i++) {
+            prevLeft = prevLeft->next;
+        }
+
+        // Step 2: Reverse from left to right
+        ListNode* curr = prevLeft->next;
+        ListNode* prev = NULL;
+        ListNode* next = NULL;
+
+        int count = right - left + 1;
+
+        while (count--) {
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        // Step 3: Connect the reversed part
+        ListNode* leftNode = prevLeft->next;
+
+        prevLeft->next = prev;
+        leftNode->next = curr;
+
+        return dummy->next;
+    }
+};
