@@ -1,0 +1,33 @@
+class Solution {
+public:
+    ListNode* insertionSortList(ListNode* head) {
+        ListNode* sorted = nullptr;
+
+        while (head != nullptr) {
+            // Take current node from original list
+            ListNode* curr = head;
+            head = head->next;
+
+            // Insert at beginning
+            if (sorted == nullptr || curr->val < sorted->val) {
+                curr->next = sorted;
+                sorted = curr;
+            }
+            else {
+                // Find correct position
+                ListNode* temp = sorted;
+
+                while (temp->next != nullptr &&
+                       temp->next->val <= curr->val) {
+                    temp = temp->next;
+                }
+
+                // Insert curr after temp
+                curr->next = temp->next;
+                temp->next = curr;
+            }
+        }
+
+        return sorted;
+    }
+};
