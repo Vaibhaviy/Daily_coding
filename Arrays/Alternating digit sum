@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int alternateDigitSum(int n) {
+        string num = to_string(n);
+        int sign = 1;
+        int sum = 0;
+
+        for (char val : num) {
+            int digit = val - '0';
+
+            sum += sign * digit;
+            sign *= -1;
+        }
+
+        return sum;
+    }
+};
