@@ -1,0 +1,35 @@
+class Solution {
+public:
+set<vector<int>>s;
+void getAllCombinations(vector<int>&arr,int i,int target, vector<vector<int>> &ans, vector<int>com){
+    if(i==arr.size() || target<0){
+        return;
+    }
+
+    if(target==0){
+        if(s.find(com)==s.end()){
+        ans.push_back(com);
+        s.insert(com);
+        }
+        return;
+        
+        
+    }
+
+com.push_back(arr[i]);
+getAllCombinations(arr,i+1,target-arr[i],ans,com);  //include element single time
+getAllCombinations(arr,i,target-arr[i],ans,com);     //including multiple time
+com.pop_back();
+getAllCombinations(arr,i+1,target,ans,com);          //excluding element
+
+}
+
+
+    vector<vector<int>> combinationSum(vector<int>& arr, int target) {
+        vector<vector<int>>ans;
+        vector<int>com;
+        getAllCombinations(arr,0,target,ans,com);
+        return ans;
+
+    }
+};
