@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int arithmeticTriplets(vector<int>& nums, int diff) {
+int count=0;
+
+        unordered_set<int> s;
+
+for(int x : nums){
+    s.insert(x);
+}
+for(int val :nums){
+   if(s.count(val+diff) && s.count(val+2*diff)){
+    count++;
+   }
+}
+
+     return count;   
+    }        
+    
+};
