@@ -1,0 +1,42 @@
+class Solution {
+public:
+
+    string convertBase(int n, int base){
+        string res = "";
+
+        while(n > 0){
+            int rem = n % base;
+            res += to_string(rem);
+            n = n / base;
+        }
+
+        reverse(res.begin(), res.end());
+        return res;
+    }
+
+    bool isPalindrome(string s){
+        int i = 0, j = s.size() - 1;
+
+        while(i < j){
+            if(s[i] != s[j])
+                return false;
+            i++;
+            j--;
+        }
+
+        return true;
+    }
+
+    bool isStrictlyPalindromic(int n) {
+
+        for(int base = 2; base <= n-2; base++){
+
+            string s = convertBase(n, base);
+
+            if(!isPalindrome(s))
+                return false;
+        }
+
+        return true;
+    }
+};
