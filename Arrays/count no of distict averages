@@ -1,0 +1,26 @@
+class Solution {
+public:
+
+int reverseNumber(int num) {
+    int reversed = 0;
+
+    while(num > 0){
+        int digit = num % 10;          // get last digit
+        reversed = reversed * 10 + digit;
+        num = num / 10;                // remove last digit
+    }
+
+    return reversed;
+}
+    int countDistinctIntegers(vector<int>& nums) {
+        unordered_set<int>s;
+        for(int val :nums){
+            s.insert(val);
+        }
+    for(int num:nums){
+        int reverse= reverseNumber(num);
+        s.insert(reverse);
+    }
+    return s.size();
+    }
+};
