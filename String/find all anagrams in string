@@ -1,0 +1,40 @@
+class Solution {
+public:
+
+    bool isFreqsame(vector<int>& a, vector<int>& b){
+        for(int i=0;i<26;i++){
+            if(a[i]!=b[i]) return false;
+        }
+        return true;
+    }
+
+    vector<int> findAnagrams(string s, string p) {
+
+        vector<int> ans;
+
+        if(s.length() < p.length()) return ans;
+
+        vector<int> pfreq(26,0), winfreq(26,0);
+
+        for(char c : p){
+            pfreq[c-'a']++;
+        }
+
+        int k = p.length();
+
+        for(int i=0;i<s.length();i++){
+
+            winfreq[s[i]-'a']++;
+
+            if(i >= k){
+                winfreq[s[i-k]-'a']--;
+            }
+
+            if(isFreqsame(pfreq, winfreq)){
+                ans.push_back(i-k+1);
+            }
+        }
+
+        return ans;
+    }
+};
